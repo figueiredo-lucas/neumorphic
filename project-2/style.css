@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Helvetica, Arial, sans-serif;
+  background: #c8cad0;
+}
+
+.light {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background: #c8cad0;
+  width: 30rem;
+  height: 30rem;
+  border-radius: 1rem;
+  box-shadow: 40px 40px 35px rgba(0, 0, 0, 0.1),
+    -20px -20px 28px 10px rgba(255, 255, 255, 0.4);
+}
+
+.text {
+  color: #7c7d82;
+  font-size: 1.5rem;
+  text-align: center;
+  user-select: none;
+}
+
+.switcher-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  margin-top: -76px; /* used to ignore the header */
+  transition: box-shadow .5s ease-in-out .2s;
+}
+
+.light.off .switcher {
+  box-shadow:
+    32px -32px 26px -30px #c8cad0,
+    -32px 32px 26px -30px #c8cad0,
+    -45px -40px 70px -20px rgba(255, 255, 255, 0.6),
+    45px 40px 70px -20px rgba(0, 0, 0, 0.25),
+    inset -20px 20px 10px -24px #c8cad0,
+    inset 20px -20px 10px -24px #c8cad0,
+    inset 24px 24px 20px -28px rgba(255, 255, 255, 0.6),
+    inset -24px -24px 20px -28px rgba(0, 0, 0, 0.25);
+}
+
+.light.on .switcher {
+  box-shadow:
+    32px -32px 26px -30px #c8cad0,
+    -32px 32px 26px -30px #c8cad0,
+    -45px -40px 70px -20px rgba(0, 0, 0, 0.25),
+    45px 40px 70px -20px  rgba(255, 255, 255, 0.6),
+    inset -20px 20px 10px -24px #c8cad0,
+    inset 20px -20px 10px -24px #c8cad0,
+    inset 24px 24px 20px -28px rgba(0, 0, 0, 0.25),
+    inset -24px -24px 20px -28px rgba(255, 255, 255, 0.6);
+}
+
+.text-container {
+  display: inline-block;
+  margin-left: -2rem;
+}
+
+.toggler-container {
+  position: relative;
+}
+
+.toggler-on,
+.toggler-off {
+  transition: all .3s ease-in-out;
+  display: inline-block;
+  position: absolute;
+}
+
+.light.off .toggler-on {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.light.on .toggler-on {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.light.off .toggler-off {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.light.on .toggler-off {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.sun {
+  width: 24px;
+  transition: fill .5s ease-in-out .2s;
+}
+
+.light.off .sun {
+  fill: #7c7d82;
+}
+.light.on .sun {
+  fill: #C44863;
+}
