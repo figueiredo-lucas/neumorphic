@@ -7,3 +7,4 @@ With this, I start a series of studies about Neumorphic design. I wanted to test
 ## Summary
 
 1. [Dark Neumorphic](project-1) by [Samson Vowles](https://dribbble.com/vowles)
+1. [Button for the Light](project-2) by [Alexandr Cassady](https://dribbble.com/cassady)
