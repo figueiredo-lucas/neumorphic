@@ -6,4 +6,4 @@ With this, I start a series of studies about Neumorphic design. I wanted to test
 
 ## Summary
 
-1. [Dark Neumorphic](project-1/README.md) by [Samson Vowles](https://dribbble.com/vowles)
+1. [Dark Neumorphic](project-1) by [Samson Vowles](https://dribbble.com/vowles)
