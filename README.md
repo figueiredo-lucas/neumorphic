@@ -12,3 +12,4 @@ https://figueiredo-lucas.github.io/neumorphic/
 
 1. [Dark Neumorphic](project-1) by [Samson Vowles](https://dribbble.com/vowles)
 2. [Button for the Light](project-2) by [Alexandr Cassady](https://dribbble.com/cassady)
+2. [Fintech x Neumorphism](project-3) by [Hero Labs](https://dribbble.com/herolabs)

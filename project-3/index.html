@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="style.css">
+  <title>Fintech x Neumorphism</title>
+</head>
+<body>
+  <div class="container active">
+    <div class="card">
+      <div class="card-data">
+        <div class="top-symbol">
+          <div class="circle top"></div>
+          <div class="circle bottom"></div>
+        </div>
+        <div class="bottom-data">
+          <div class="left-info">
+            <span style="margin-bottom: 1rem">0000 0000 0000 1111</span>
+            <span style="font-size: 0.75rem">JOHN HERO</span>
+          </div>
+          <div class="right-info">
+            <div class="mastercard-circle abs-left"></div>
+            <div class="mastercard-ring abs-left"></div>
+            <div class="mastercard-circle abs-right"></div>
+            <div class="mastercard-ring abs-right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-container">
+      <div class="slider">
+        <div class="slider-ball"></div>
+      </div>
+      <div class="light-container">
+        <div class="light"></div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  (function () {
+    const sliderBall = document.querySelector('.slider-ball');
+    const container = document.querySelector('.container');
+    function toggle() {
+      if (container.classList.contains('active')) {
+        container.classList.remove('active');
+        container.classList.add('inactive');
+      } else {
+        container.classList.add('active');
+        container.classList.remove('inactive');
+      }
+
+    }
+
+    sliderBall.addEventListener('click', toggle);
+  })();
+</script>
+</html>
