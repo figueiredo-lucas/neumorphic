@@ -1,0 +1,187 @@
+:root {
+  --blue-darkest: #012cb8;
+  --blue-dark: #0144fc;
+  --blue-dark-60: rgba(1, 68, 252, .6);
+  --blue: #489cfa;
+  --blue-40: rgba(72, 156, 250, .4);
+  --blue-light: #a9e1ff;
+  --blue-light-60: rgba(169, 225, 255, .6);
+  --blue-light-10: rgba(169, 225, 255, .1);
+  --blue-lightest: #d9f0fc;
+  --blue-lightest-50: rgba(217, 240, 252, .5);
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue);
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.card {
+  height: 280px;
+  width: 187.5px;
+  border: 4px solid var(--blue);
+  border-radius: 28px 12px 28px 12px;
+  box-shadow: -8px -8px 28px var(--blue-light),
+    8px 8px 28px var(--blue-dark-60),
+    inset 6px 6px 14px var(--blue-dark-60),
+    inset -6px -6px 14px var(--blue-light);
+  display: flex;
+  position: relative;
+}
+
+.left-stripe {
+  flex: 2;
+  background: var(--blue);
+  z-index: -1;
+}
+
+.right-stripe {
+  flex: 1;
+  background: var(--blue-light-10);
+  z-index: -1;
+}
+
+.content-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.round-button {
+  margin-top: -.25rem;
+  margin-left: -.25rem;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  padding: 6.5px;
+  border: none;
+  box-sizing: border-box;
+  background: var(--blue);
+  /* box-shadow: -4px -2px 20px -4px var(--blue-lightest-50),
+    8px 6px 20px -4px var(--blue-dark),
+    inset 4px 2px 8px -4px var(--blue-lightest-50),
+    inset -8px -6px 8px -10px var(--blue-dark); */
+  box-shadow: -4px -2px 20px -4px var(--blue-light),
+    8px 6px 20px -4px var(--blue-dark),
+    inset 2px 1px 6px -2px var(--blue-light),
+    inset -4px -2px 6px -5px var(--blue-dark);
+  outline: none;
+}
+
+.inner-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-dark-60);
+  font-size: 1.58rem;
+  box-shadow: -1px -1px 6px -1px var(--blue-light),
+    1px 1px 6px -1px var(--blue-dark-60),
+    inset 2px 1px 3px -2px var(--blue-light),
+    inset -2px -1px 3px -2px var(--blue-dark-60);
+  /* box-shadow: -1px -1px 6px -1px var(--blue-lightest-50),
+    1px 1px 6px -1px var(--blue-dark-60),
+    inset 2px 1px 6px -2px var(--blue-lightest-50),
+    inset -2px -1px 4px -2px var(--blue-dark-60); */
+}
+
+.inner-circle:active {
+  box-shadow: 1px 1px 6px var(--blue-light),
+    -2px -1px 6px var(--blue-dark-60),
+    inset -4px -2px 8px -2px var(--blue-light),
+    inset 6px 4px 10px -2px var(--blue-dark-60);
+}
+
+.text-container {
+  flex: 1;
+  margin-top: 40px;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.gradient-text {
+  position: relative;
+  background: linear-gradient(to bottom, var(--blue-light), var(--blue-lightest), var(--blue-lightest), var(--blue-lightest));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+.gradient-text:after {
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  content: 'Oh';
+  text-shadow: 8px 8px 24px var(--blue-dark-60);
+}
+
+.floating-text {
+  background: linear-gradient(to bottom, var(--blue-light), var(--blue-lightest), var(--blue-lightest), var(--blue-lightest));
+  height: 48px;
+  width: 135px;
+  box-sizing: border-box;
+  padding-left: 38px;
+  margin-left: -35px;
+  border-radius: 12px 12px 0px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  box-shadow: 12px 12px 24px var(--blue-dark-60),
+    6px 18px 32px var(--blue-dark-60),
+    -6px -6px 40px -14px var(--blue-lightest);
+}
+
+.floating-at {
+  background: var(--blue);
+  color: var(--blue-lightest);
+  width: 90px;
+  height: 24px;
+  padding: 4px;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: normal;
+  border-radius: 0px 0px 12px 12px;
+  box-shadow: 12px 12px 24px var(--blue-dark-60);
+}
+
+.icons-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 .75rem .75rem .75rem;
+}
+
+.icons-container img,
+.icons-container svg {
+  width: 16px;
+  fill: var(--blue-dark-60);
+  pointer-events: none;
+}
+
+.icons-container span {
+  position: relative;
+  cursor: pointer;
+}
+
+.icons-container span.active:after {
+  position: absolute;
+  content: '';
+  border: 2px solid var(--blue-lightest);
+  border-radius: 50%;
+  bottom: -5px;
+  left: calc(50% - 1px);
+}
