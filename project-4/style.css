@@ -91,10 +91,6 @@ body {
     1px 1px 6px -1px var(--blue-dark-60),
     inset 2px 1px 3px -2px var(--blue-light),
     inset -2px -1px 3px -2px var(--blue-dark-60);
-  /* box-shadow: -1px -1px 6px -1px var(--blue-lightest-50),
-    1px 1px 6px -1px var(--blue-dark-60),
-    inset 2px 1px 6px -2px var(--blue-lightest-50),
-    inset -2px -1px 4px -2px var(--blue-dark-60); */
 }
 
 .inner-circle:active {
