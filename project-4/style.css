@@ -66,10 +66,6 @@ body {
   border: none;
   box-sizing: border-box;
   background: var(--blue);
-  /* box-shadow: -4px -2px 20px -4px var(--blue-lightest-50),
-    8px 6px 20px -4px var(--blue-dark),
-    inset 4px 2px 8px -4px var(--blue-lightest-50),
-    inset -8px -6px 8px -10px var(--blue-dark); */
   box-shadow: -4px -2px 20px -4px var(--blue-light),
     8px 6px 20px -4px var(--blue-dark),
     inset 2px 1px 6px -2px var(--blue-light),
