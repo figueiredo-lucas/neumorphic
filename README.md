@@ -14,3 +14,4 @@ https://figueiredo-lucas.github.io/neumorphic/
 2. [Button for the Light](project-2) by [Alexandr Cassady](https://dribbble.com/cassady)
 2. [Fintech x Neumorphism](project-3) by [Hero Labs](https://dribbble.com/herolabs)
 2. [Contact Card](project-4) by [Michal Simkovic](https://dribbble.com/musHo)
+2. [Skeuomorphic Music Player](project-5) by [Max ⚡️ Osichka](https://dribbble.com/max_osichka)

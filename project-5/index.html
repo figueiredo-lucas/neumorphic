@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <title>Document</title>
+  <style>
+    :root {
+      --background: #e3e8f2;
+      --image-background-min: #fdfdfe;
+      --image-background-max: #f2f5f7;
+      --controls-white: #f5f6f7;
+      --controls-blue: #316ce7;
+      --min-gradient: #2d69e1;
+      --max-gradient: #5c4ba0;
+      --font-color: #102530;
+      --font-grey: #55636b;
+      --font-light-grey: #9ca4a8;
+      --shadow: rgba(183, 189, 206, 0.6);
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      background: var(--background);
+      font-family: Lato, Alata, Arial, Helvetica, sans-serif;
+      color: var(--font-color);
+    }
+
+    .screen {
+      background: linear-gradient(to bottom left, var(--image-background-min), var(--image-background-max));
+      width: 240px;
+      height: 520px;
+      box-sizing: border-box;
+      padding: 1.5rem;
+      border-radius: 32px;
+      margin: 1rem;
+      z-index: 1;
+      box-shadow: 32px 92px 48px 12px var(--shadow),
+        -4px 8px 18px -8px var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .send-back {
+      z-index: 0;
+      margin-top: 6rem;
+      box-shadow: 32px 33px 40px -28px var(--shadow);
+    }
+
+    .volume-marker {
+      width: 168px;
+      height: 168px;
+      border-radius: 50%;
+      background-image: url("dashed-border.svg");
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      align-self: center;
+    }
+
+    .volume-holder {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 2px 2px 2px var(--shadow),
+        inset 0px 0px 2px white;
+    }
+
+    .volume-border {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      box-sizing: border-box;
+      background-image: url("dotted-border.svg");
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .volume {
+      width: 115px;
+      height: 115px;
+      border-radius: 50%;
+      box-sizing: border-box;
+      background-color: var(--controls-white);
+      box-shadow: 1px 0px 4px var(--shadow),
+        12px 12px 16px var(--shadow),
+        inset 0px 0px 0px 1px white,
+        inset 12px 12px 24px white;
+      z-index: -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .volume-number-text {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .volume-text {
+      font-size: 12px;
+      color: var(--font-grey);
+    }
+
+    .header {
+      display: flex;
+      margin: 1rem 0;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: var(--font-light-grey);
+    }
+
+    .img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .tracker {
+      padding: 1rem 0 1.15rem 0;
+    }
+
+    .timer {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .5rem;
+    }
+
+    .timer span {
+      font-size: 9px;
+      color: var(--font-light-grey);
+    }
+
+    .track-holder {
+      position: relative;
+      height: 8px;
+      border-radius: 4px;
+      box-shadow: 1px 2px 4px var(--shadow),
+        1px -2px 4px white,
+        inset 1px 2px 2px var(--shadow),
+        inset -1px -2px 2px white,
+        inset 1px 2px 12px var(--shadow);
+      box-sizing: border-box;
+      padding: 1px;
+    }
+
+    .track {
+      width: 64.4%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--min-gradient), var(--max-gradient));
+      z-index: -1;
+    }
+
+    .track-handler {
+      position: absolute;
+      left: 64.4%;
+      top: -5px;
+      transform: translateX(-50%);
+      height: 18px;
+      width: 32px;
+      padding: 4px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      background-color: var(--controls-white);
+      box-shadow: 1px 0px 4px var(--shadow),
+        6px 6px 16px var(--shadow),
+        inset 0px 0px 0px 1px white,
+        inset 6px 6px 24px white;
+    }
+
+    .track-handler-inner {
+      height: 10px;
+      width: 24px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 1px 2px 2px -1px var(--shadow),
+        1px -2px 2px -1px white,
+        inset 1px 2px 2px -2px var(--shadow),
+        inset -1px -2px 4px white;
+    }
+
+    .track-handler-tick {
+      display: inline-block;
+      height: 6px;
+      width: 2px;
+      border-radius: 1px;
+      background: linear-gradient(to bottom, var(--min-gradient), var(--max-gradient));
+    }
+
+    .play-buttons-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    .control-circle {
+      border-radius: 50%;
+      padding: 4px;
+      box-shadow: inset -2px -2px 2px white,
+        inset 1px 1px 1px var(--shadow),
+        4px 4px 12px -4px var(--shadow);
+    }
+
+    .inner-control-circle {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 1px 0px 4px var(--shadow),
+        2px 2px 4px var(--shadow),
+        inset 12px 12px 24px white,
+        inset -12px -12px 32px -8px var(--shadow);
+    }
+
+    .inner-control-circle i,
+    .inner-control-repeat i {
+      font-size: 16px;
+    }
+
+    .inner-control-circle--big {
+      height: 48px;
+      width: 48px;
+      box-shadow: 1px 0px 4px var(--shadow),
+        2px 2px 4px var(--shadow),
+        inset 12px 12px 24px white,
+        inset -12px -12px 32px -14px var(--shadow);
+    }
+
+    .inner-control-circle--big i {
+      font-size: 24px;
+    }
+
+    .control-repeat {
+      margin: 1rem .5rem;
+      height: 40px;
+      border-radius: 20px;
+      padding: 4px;
+      box-sizing: border-box;
+      display: flex;
+      box-shadow: inset -2px -2px 2px white,
+        inset 1px 1px 1px var(--shadow),
+        4px 4px 12px -4px var(--shadow);
+    }
+
+    .inner-control-repeat {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 1px 0px 4px var(--shadow),
+        2px 2px 4px var(--shadow),
+        inset 12px 12px 24px white,
+        inset -12px -12px 32px -24px var(--shadow);
+    }
+
+    .inner-control-repeat.left {
+      border-radius: 16px 0 0 16px;
+    }
+
+    .inner-control-repeat.right {
+      border-radius: 0 16px 16px 0;
+    }
+
+    .iphone-bar {
+      height: 3px;
+      width: 80px;
+      margin: auto;
+      border-radius: 3px;
+      background: var(--font-color);
+    }
+
+    .switcher-holder {
+      height: 24px;
+      width: 48px;
+      border-radius: 8px;
+      box-sizing: border-box;
+      padding: 4px;
+      box-shadow:
+        inset -1px 0px 1px white,
+        inset 4px 3px 6px var(--shadow),
+        2px 2px 12px -4px var(--shadow)
+    }
+
+    .switcher-base {
+      height: 16px;
+      width: 40px;
+      border-radius: 6px;
+      background-color: white;
+      position: relative;
+      perspective: 30px;
+      perspective-origin: left;
+      box-shadow: 0 -4px 3px -4px var(--shadow),
+        0 4px 4px -4px var(--shadow);
+    }
+
+    .switcher-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: white;
+      height: 16px;
+      width: 20px;
+      border-radius: 6px 0 0 6px;
+      color: var(--font-light-grey);
+      font-size: 7.5px;
+      box-sizing: border-box;
+      padding-right: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      box-shadow: -3px 0px 4px -2px var(--shadow),
+        inset -12px -12px 24px white,
+        inset -12px -12px 32px -24px var(--shadow);
+    }
+
+    .switcher-holder.on .switcher-left {
+      transform: rotateY(20deg);
+      height: 18px;
+      top: -1px;
+      margin-left: 3px;
+      box-shadow: -1px 0px 4px -1px var(--shadow),
+        inset 1px 1px 1px white,
+        inset 6px 4px 12px -6px var(--shadow);
+    }
+
+    .switcher-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: white;
+      height: 16px;
+      width: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 6px 6px 0;
+      box-sizing: border-box;
+      box-shadow: 3px 0px 4px -2px var(--shadow),
+        inset -4px 4px 12px -8px var(--shadow);
+    }
+
+    .blue-circle {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--controls-blue);
+      box-shadow: 0px 0px 6px var(--controls-blue);
+    }
+
+    .equalizer {
+      display: flex;
+      height: 200px;
+    }
+
+    .equalizer>div.eq-range {
+      flex: 1;
+    }
+
+    .eq-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      color: var(--font-light-grey);
+      font-size: 8.5px;
+      padding-right: 1rem;
+    }
+
+    .range-holder {
+      position: relative;
+      width: 8px;
+      height: 100%;
+      border-radius: 4px;
+      box-shadow: 2px 1px 4px var(--shadow),
+        2px -1px 4px white,
+        inset 2px 1px 2px var(--shadow),
+        inset -2px -1px 2px white;
+      box-sizing: border-box;
+      padding: 1px;
+    }
+
+    .range-holder .track-handler {
+      transform: rotate(-90deg);
+      transform-origin: -1px;
+    }
+
+    .eq-range {
+      display: flex;
+    }
+
+    .eq-range-ticks {
+      background-image: url(dash.svg);
+      height: 190px;
+      width: 15px;
+      margin: 7px 0 3px 0;
+    }
+
+    .equalizer-info {
+      display: flex;
+      margin: 1rem 0 .5rem 0;
+    }
+
+    .info-text {
+      flex: 1;
+      font-size: 10px;
+      padding-left: .5rem;
+      display: flex;
+    }
+
+    .info-text:nth-child(3) {
+      justify-content: center;
+    }
+
+    .info-text:last-child {
+      justify-content: flex-end;
+    }
+
+    .eq-range:nth-child(3) {
+      justify-content: center;
+    }
+
+    .eq-range:last-child {
+      padding-right: 4px;
+      justify-content: flex-end;
+    }
+
+    .preset-container {
+      height: 36px;
+      z-index: -1;
+      margin-bottom: .5rem;
+    }
+
+    .preset-container .inner-control-repeat {
+      height: 28px;
+      font-size: 9px;
+      cursor: pointer;
+    }
+
+    .preset-container .inner-control-repeat.preset-1 {
+      border-radius: 12px 0 0 12px;
+    }
+
+    .preset-container .inner-control-repeat.preset-3 {
+      border-radius: 0 12px 12px 0;
+    }
+
+    .preset-container .inner-control-repeat.pressed {
+      color: var(--controls-blue);
+      z-index: -1;
+      margin-left: 2px;
+      transform: translateY(2px);
+      box-shadow: 0px 1px 2px var(--shadow),
+        inset 12px 12px 24px white,
+        inset -12px -12px 32px -24px var(--shadow);
+    }
+
+    .pitch {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .75rem;
+    }
+
+    .pitch span {
+      font-size: 10px;
+      color: var(--font-light-grey);
+    }
+
+    .pitch span.pitch-label {
+      color: var(--font-color);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="screen">
+    <div>
+      <i class="material-icons">keyboard_backspace</i>
+    </div>
+    <div class="header">
+      <div>
+        <div class="title">Lowlife</div>
+        <div class="subtitle">Poppy</div>
+      </div>
+      <img class="img" src="cover.webp">
+    </div>
+    <div class="volume-marker">
+      <div class="volume-holder">
+        <div class="volume-border">
+          <div class="volume">
+            <span class="volume-number-text">75%</span>
+            <span class="volume-text">Volume</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tracker">
+      <div class="timer">
+        <span>2:12</span>
+        <span>3:25</span>
+      </div>
+      <div class="track-holder">
+        <div class="track-handler">
+          <div class="track-handler-inner">
+            <span class="track-handler-tick"></span>
+          </div>
+        </div>
+        <div class="track"></div>
+      </div>
+    </div>
+    <div class="play-buttons-container">
+      <div class="control-circle">
+        <div class="inner-control-circle">
+          <i class="material-icons">skip_previous</i>
+        </div>
+      </div>
+      <div class="control-circle">
+        <div class="inner-control-circle inner-control-circle--big">
+          <i class="material-icons">play_arrow</i>
+        </div>
+      </div>
+      <div class="control-circle">
+        <div class="inner-control-circle">
+          <i class="material-icons">skip_next</i>
+        </div>
+      </div>
+    </div>
+    <div class="repeat-buttons-container">
+      <div class="control-repeat">
+        <div class="inner-control-repeat left">
+          <i class="material-icons">repeat</i>
+        </div>
+        <div class="inner-control-repeat right">
+          <i class="material-icons">shuffle</i>
+        </div>
+      </div>
+    </div>
+    <div class="iphone-bar"></div>
+  </div>
+  <div class="screen send-back">
+    <div>
+      <i class="material-icons">close</i>
+    </div>
+    <div class="header">
+      <div class="title">Equalizer</div>
+      <div class="switcher-holder on">
+        <div class="switcher-base">
+          <div class="switcher-left">ON</div>
+          <div class="switcher-right">
+            <span class="blue-circle"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="equalizer">
+      <div class="eq-text">
+        <span>+15db</span>
+        <span>0db</span>
+        <span>-15db</span>
+      </div>
+      <div class="eq-range">
+        <div class="eq-range-ticks"></div>
+        <div class="range-holder">
+          <div class="track-handler" style="margin-top: 66.5px;">
+            <div class="track-handler-inner">
+              <span class="track-handler-tick"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="eq-range">
+        <div class="eq-range-ticks"></div>
+        <div class="range-holder">
+          <div class="track-handler" style="margin-top: 113.5px;">
+            <div class="track-handler-inner">
+              <span class="track-handler-tick"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="eq-range">
+        <div class="eq-range-ticks"></div>
+        <div class="range-holder">
+          <div class="track-handler" style="margin-top: 90px;">
+            <div class="track-handler-inner">
+              <span class="track-handler-tick"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="equalizer-info">
+      <div style="width: 40.61px"></div>
+      <div class="info-text">LOW</div>
+      <div class="info-text">MID</div>
+      <div class="info-text">HIGH</div>
+    </div>
+    <div class="control-repeat preset-container">
+      <div class="inner-control-repeat preset-1">PRE-1</div>
+      <div class="inner-control-repeat preset-2 pressed">PRE-2</div>
+      <div class="inner-control-repeat preset-3">PRE-3</div>
+    </div>
+    <div class="tracker">
+      <div class="pitch">
+        <span>-</span>
+        <span class="pitch-label">PITCH</span>
+        <span>+</span>
+      </div>
+      <div class="track-holder">
+        <div class="track-handler" style="left:50%">
+          <div class="track-handler-inner">
+            <span class="track-handler-tick"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="iphone-bar"></div>
+  </div>
+</body>
+<script>
+  (function () {
+    const presets = document.querySelectorAll('.preset-container .inner-control-repeat');
+    [...presets].forEach(p => {
+      p.addEventListener('click', pressed)
+    });
+
+    function pressed(event) {
+      if (!event.target.classList.contains('pressed')) {
+        [...presets].forEach(p => p.classList.remove('pressed'));
+        event.target.classList.add('pressed');
+      }
+    }
+  })()
+</script>
+</html>
